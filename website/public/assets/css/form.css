@@ -1,0 +1,87 @@
+.jumbotron {
+    background-color: #222222;
+    color: white;
+    padding-bottom: 1em;
+    padding-top: 2em;
+}
+
+.img-logo {
+
+    width: 30%;
+    margin-bottom: 2em;
+}
+
+.header-text {
+    text-align: justify;
+    font-style: italic;
+    margin-right: 0;
+}
+
+.promote {
+
+    /*margin-bottom: 3em;*/
+    padding-left: 2em;
+    padding-right: 2em;
+    
+}
+
+.delivery-text {
+
+    margin-left: 1%;
+    padding-top: 1%;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+.img-banner {
+    width: 25%;
+}
+
+.category-title {
+    margin-top: 5%;
+}
+
+
+.container-in-form {
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.form-picture{
+    width: 35em;
+    height: auto;
+}
+
+
+.valid-button {
+
+    margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conso-quantity-field {
+    margin-left: 2em;
+}
+
+
+hr {
+    background-color: #222222;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+@media screen and (min-width: 400px) {
+    h1 {
+        font-size:20px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    h1 {
+        font-size:35px;
+    }
+}

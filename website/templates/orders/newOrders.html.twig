@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Formulaire de prise de commande' %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+    {% endblock %}
+
+{% block body %}
+
+
+
+    <div class="jumbotron text-center">
+        <img class="img-logo" src="{{ asset('assets/images/Beans-logo-horizontal-white.png') }}" alt="Logo">
+        <h1 class="jumbotron-title">Ma commande</h1>
+    </div>
+
+    <div class="row justify-content-center header-text">
+        <div class="col-md-5 promote">
+            <p>Vous vous apprêtez à commander du café artisanal du grain à la tasse, cultivé avec passion par des producteurs engagés et torréfié avec amour par Alicia, Maria & Fabian, responsables de votre carburant BONHEUR ! </p>
+            <p>Découvrez nos éditions "Nouvelle récolte Colombie" de Morning Uppercut et Daily. Il s'agit de vos cafés "Beans au quotidien" issus de notre filière directe en Colombie. Nous vous proposons de découvrir ce mois-ci 2 de nos producteurs colombiens : Jonathan Lara et Cécilia Arias.</p>
+            <p>Après validation de votre commande, nous mettrons tout en oeuvre pour vous livrer le même jour de production (les mercredis) et ainsi vous garantir un café fraîchement torréfié.</p>
+        </div>
+    </div>
+
+
+        <div class="container">
+            <img class="img-banner rounded mx-auto d-block" src="{{ asset('assets/images/picto-ligne.jpg') }}" alt="Picto">
+            <form action="/orders/create" method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Email: </h4>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="email" value="">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Date de livraison : </h4>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="datetime-local" class="form-control" name="deliveryDate">
+                        <p class="delivery-text">Délais maximum : 60 jours</p>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="category-title">Beans au quotidien</h2>
+                    </div>
+                </div>
+                <div class="container">
+                    {% for product in allProductsQuotidien %}
+                        <hr>
+                        <div class="row container-in-form">
+                            <div class="col-md-6">
+                                {% if product.path %}
+                                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-thumbnail form-picture" alt="{{ product.name }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <h4>{{ product.name }}</h4>
+                                <br>
+                                <label>Quantity :</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="quantity[{{ product.id }}]" min="0" max="500" value="0">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"> Kg </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+                <img class="img-banner rounded mx-auto d-block" src="{{ asset('assets/images/picto-ligne.jpg') }}" alt="Picto">
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="category-title">Beans découvertes</h2>
+                    </div>
+                </div>
+                <div class="container">
+                    {% for product in allProductsDecouverte %}
+                        <hr>
+                        <div class="row container-in-form">
+                            <div class="col-md-6">
+                                {% if product.path %}
+                                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-thumbnail form-picture" alt="{{ product.name }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <h4>{{ product.name }}</h4>
+                                <br>
+                                <label>Quantity :</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="quantity[{{ product.id }}]" min="0" max="500" value="0">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"> Kg </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="category-title">Consommables</h2>
+                    </div>
+                </div>
+                <hr>
+                <div class="container">
+                    {% for product in allProductsConso %}
+                        <div class="row container-in-form justify-content-center">
+                            {#<div class="col-md-6">#}
+                                {#{% if product.path %}#}
+                                    {#<img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-thumbnail form-picture" alt="{{ product.name }}">#}
+                                {#{% endif %}#}
+                            {#</div>#}
+                            <div class="col-md-7">
+                                <h4>{{ product.name }}</h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label>Quantity : </label>
+                                    <input type="number" class="form-control conso-quantity-field" name="quantity[{{ product.id }}]" min="0" max="500" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="row">
+                    <button type="submit" class="btn btn-dark valid-button">Valider ma commande</button>
+                </div>
+            </form>
+        </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+easy_admin:
+  site_name: '<em style="font-size: 80%;">The_Back_0n_Fire</em> 🔥'
+  list:
+    max_results: 20
+  entities:
+    Orders:
+      class: App\Entity\Orders
+      list:
+        #disabled_actions: ['new', 'delete']
+        fields: ['id', {property: 'userId', label: 'Client'}, 'creationDate', 'deliveryDate', {property: 'totalExcludingTax', label: 'TotalHT(€)'}, {property: 'totalTax', label: 'Total(€)'}, 'status', 'frequency']
+        actions:
+          - { name: 'show', icon: 'eye', title: 'Show' }
+          - { name: '-edit' }
+          - { name: '-new' }
+          - { name: '-delete' }
+      show:
+        fields: ['id', {property: 'userId', label: 'Client'}, 'creationDate', 'deliveryDate', {property: 'totalExcludingTax', label: 'TotalHT(€)'}, {property: 'totalTax', label: 'Total(€)'}, {property: 'totalWeight', label: 'Total(Kg)'}, 'status', 'frequency', {property: 'orderItems', label: 'Item'}]
+        actions:
+          #- { name: '-edit' }
+          #- { name: '-delete' }
+
+
+
+
+
+    OrderItems:
+      class: App\Entity\OrderItems
+      list:
+        fields: ['id', 'orderId', 'sku', {property: 'productId', label: 'Product'}, 'quantity', {property: 'weight', label: 'Weight(Kg)'}, {property: 'price', label: 'Price(€)'}]
+        actions:
+          - { name: 'show', icon: 'eye', title: 'Show' }
+          - { name: 'delete', icon: 'trash', title: 'Delete' }
+          - { name: '-edit' }
+      show:
+        fields: ['id', 'sku', 'quantity', {property: 'price', label: 'Price (€)'}, {property: 'weight', label: 'Weight (Kg)'}, {property: 'tax', label: 'Tax (%)'}, {property: 'productId', label: 'Product'}, {property: 'orderId', label: 'Order'}]
+
+    Products:
+      class: App\Entity\Products
+      list:
+        fields: ['id', 'name', {property: 'price', label: 'Price(€)'}, {property: 'weight', label: 'Weight(Kg)'}, {property: 'tax', label: 'Tax(%)'}, 'sku', { property: 'batch', type: 'float', label: 'Batch(Kg)'}, { property: 'path', label: 'Image', type: 'image', base_path: '%app.path.product_images%' }, {property: 'category', label: 'Category'}]
+        actions:
+          - { name: 'show', icon: 'eye', title: 'Show' }
+          - { name: 'delete', icon: 'trash', title: 'Delete' }
+          - { name: '-edit' }
+          - { name: '-delete' }
+        sort: ['id', 'ASC']
+      form:
+        fields: ['name', 'price', 'weight', 'tax', 'sku', { property: 'batch', type: 'number'}, { property: 'imageFile', label: 'Image', type: 'file' }, {property: 'category', label: 'Category'}]
+      new:
+        title: 'Add products'
+      edit:
+        title: 'Edit products'
+      show:
+        title: 'products : %%entity_id%%'
+        fields: ['id', 'name', 'price', 'weight', 'tax', 'sku', { property: 'batch', type: 'float'}, { property: 'path', label: 'Image', type: 'image', base_path: '%app.path.product_images%' }, {property: 'category', label: 'Category'}]
+
+
+
+    Users:
+      class: App\Entity\Users
+      list:
+        fields: ['id', 'email', 'name', 'surname', 'enterprise']
+        actions:
+          - { name: 'show', icon: 'eye', title: 'Show' }
+          - { name: '-edit' }
+          - { name: '-delete' }
+        sort: ['id', 'ASC']
+      form:
+        fields: ['email', 'name', 'surname', 'enterprise']
+      new:
+        title: 'Add user'
+      edit:
+        title: 'Edit user'
+      show:
+        title: 'User : %%entity_id%%'
+        fields: ['id', 'email', 'name', 'surname', 'enterprise']
+
+
+    Admins:
+      class: App\Entity\Admins
+      disabled_actions: ['new', 'edit', 'delete']
+
+  design:
+    brand_color: 'rgb(255, 196, 0)'
+
+
